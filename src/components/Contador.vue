@@ -85,19 +85,18 @@ export default {
                     this.timeWorked.sec = this.timeWorked.sec + 1;
  
                     if(this.timeWorked.sec == 60){
-                        this.timeWorked.sec = 0;
+                        this.timeWorked.sec = (0 - 1);
                         this.timeWorked.min = this.timeWorked.min + 1;
                         this.timeWorked.sec = this.timeWorked.sec + 1;
                     }
 
                     if(this.timeWorked.min == 60){
-                        this.timeWorked.sec = 0;
-                        this.timeWorked.min = 0;
+                        this.timeWorked.min = 0
                         this.timeWorked.hour = this.timeWorked.hour + 1;
                     }
 
                     this.count = `<span>Tempo trabalhado:</span>  ${this.timeWorked.hour} <strong>hora:</strong>  ${this.timeWorked.min} <strong>minutos:</strong> ${this.timeWorked.sec} <strong>segundos</strong>`;
-                },1000)
+                },5)
             }
         },
         currentTime(){
