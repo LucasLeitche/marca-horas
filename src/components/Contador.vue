@@ -1,12 +1,34 @@
 <template>
-  <div class="w-full h-full my-0 my-32 flex flex-col justify-center items-center gap-3">
-    <span>Total trabalhado: 0</span>
-    <span v-html="count"></span>
-    <span>Data e Hora :{{dateNow}}</span>
-    <div class="flex gap-3 flex-wrap">
+  <div class="w-full h-full flex flex-col justify-center items-center mt-20 mb-15 ">
+    <div class="mb-16">
+        <span class="text-green-400 text-xl font-semibold text-animation" v-if="timer">Rodando</span>
+        <span class="text-dark-red text-xl font-semibold text-animation" v-if="!timer && count">Pausado</span>
+    </div>
+    <div class="flex flex-col items-start justify-center p-3 w-[300px] h-[100px]   rounded-md absolute left-3 top-20 text-light font-semibold text-md">
+        <span>Total trabalhado: </span>
+        <span>Hora: <span class="text-dark-green underline"> R$ 22,00 </span></span>
+        <span>A receber: <span class="text-dark-green underline"> R$ 22,00 </span></span>
+    </div>
+    <div id="container-timer" class="flex gap-5 items-center">
+        <div class="squad-timer">
+            {{timeWorked.hour}}
+            <small class="text-sm my-2 opacity-60">Horas</small>
+        </div>
+        <span class="points">:</span>
+        <div class="squad-timer">
+            {{timeWorked.min}}
+            <small class="text-sm my-2 opacity-60">Minutos</small>
+        </div>
+        <span class="points">:</span>
+        <div class="squad-timer">
+            {{timeWorked.sec}}
+            <small class="text-sm my-2 opacity-60">Segundos</small>
+        </div>
+    </div>
+    <div class="flex gap-3 flex-wrap my-10">
         <button 
             @click="startCount()"
-            class="btn bg-light-lilac text-light px-[32px] py-[18px] rounded-xl disabled:bg-dark-lilac disabled:text-zinc-500 disabled:cursor-not-allowed"
+            class="btn bg-light-lilac bg-opacity-60 text-light px-[32px] py-[18px] rounded-xl disabled:bg-dark-lilac disabled:text-zinc-500 disabled:cursor-not-allowed"
             :disabled="timer"
         >
             <span class="text-[16pt] ">Iniciar Contagem</span>
@@ -35,7 +57,7 @@
 export default {
     data(){
         return{
-            count: "0:0:0",
+            count: null,
             timer: null,
             dateNow: 0,
             day: null,
@@ -48,6 +70,17 @@ export default {
         }
     },
     methods:{
+        resetTime(){
+            this.timeWorked = {
+                sec: 0,
+                min:0,
+                hour:0
+            }
+        },
+        finishCount(){
+            this.count = '<strong>hora:</strong>  0 <strong>minutos:</strong> 0 <strong>segundos</strong>'
+            this.timer = null
+        },
         finishDay(){
             let dataRegister = {
                 day: this.day,
@@ -58,6 +91,8 @@ export default {
             }
             if(confirm('Você tem certeza que deseja finalizar o dia?') == true){
                 this.pauseCount();
+                this.finishCount();
+                this.resetTime();
                 this.$emit('finishDay', dataRegister)
             } else{
                 return;
@@ -95,8 +130,8 @@ export default {
                         this.timeWorked.hour = this.timeWorked.hour + 1;
                     }
 
-                    this.count = `<span>Tempo trabalhado:</span>  ${this.timeWorked.hour} <strong>hora:</strong>  ${this.timeWorked.min} <strong>minutos:</strong> ${this.timeWorked.sec} <strong>segundos</strong>`;
-                },5)
+                    this.count = `${this.timeWorked.hour} <strong>hora:</strong>  ${this.timeWorked.min} <strong>minutos:</strong> ${this.timeWorked.sec} <strong>segundos</strong>`;
+                },1000)
             }
         },
         currentTime(){
@@ -130,5 +165,43 @@ export default {
 </script>
 
 <style>
+    @keyframes animate {
+        0%{
+            opacity: 0;
+        }
+        50%{
+            opacity: 0.7;
+        }
+        100%{
+            opacity: 0;
+        }
+    }
+.text-animation{
+    animation: animate 
+                1.5s linear infinite;
+}
+.squad-timer{
+    background: #6730b52d;
+    @apply
+        flex
+        flex-col
+        justify-center
+        items-center
+        text-light
+        text-6xl
+        border
+        border-light-lilac
+        border-opacity-30
+        shadow-md
+        shadow-gray-800
+        rounded-md
+        p-3
+        w-[180px]
+        h-[180px]
+}
+.points{
+    @apply
+        text-light
 
+}
 </style>

@@ -1,9 +1,11 @@
 import { ApiPost, ApiGet, ApiListGet, ApiDelete, ApiPut } from '../register';
-
+import { ListData } from './listData';
 // const finishLoad = () =>{
 //     store.dispatch('setLoading', false);
 // }
 const path = 'registers';
+
+export const instace = new ListData();
 
 
 const handleResquest = async (res, error ) =>{
@@ -17,18 +19,17 @@ const handleResquest = async (res, error ) =>{
     
         // store.dispatch(pathStore, res.data)
     
-    if(res){
+    const method = res.config.method.toUpperCase();
+
+    if( method == 'POST' || method == 'PUT' || method == 'DELETE' ){
         alert('Realizado com sucesso');
+    } else{
+        instace.setData(res.data);
     }
 
-    Response(res.data)
 }
 
-var resposta = null
-async function Response(res){
-    return resposta = res
-}
-export var retorno = resposta
+ 
 
 export async function PostRegister(payload){
     await ApiPost(path, payload , (res, error) => handleResquest(res, error))
@@ -42,9 +43,12 @@ export async function GetRegister(payloadId){
     await ApiGet(path, payloadId, (res, error) => handleResquest(res, error, 'setRegister' ))
 }
 
-export async function GetListRegisters(callback){
-    await ApiListGet(path, (res, error) => handleResquest(res, error, 'setRegister' ))
+
+export async function GetListRegisters(){
+    await ApiListGet(path, async (res, error) => await handleResquest(res, error, 'setRegister' ))
 }
+
+
 
 export async function DeleteRegister(payloadId){
     await ApiDelete(path, payloadId, (res, error)=> handleResquest(res, error))

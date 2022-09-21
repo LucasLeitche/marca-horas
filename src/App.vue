@@ -4,6 +4,10 @@
 import Contador from './components/Contador.vue'
 import ListWorkTimes from './components/ListWorkTimes.vue';
 import Modal from './components/Modal.vue';
+import { GetListRegisters } from './api/registers/registerApiService';
+import { instace } from './api/registers/registerApiService';
+
+
 export default{
   components:{
     Contador,
@@ -13,28 +17,46 @@ export default{
   data(){
     return{
       showModal: false,
-      dataRegister: {}
+      dataRegisters:[],
+      dataRegister:{}
     }
   },
   methods:{
+    async loadData(){
+      await GetListRegisters();
+      this.dataRegisters = {...instace.data}
+      console.log(this.dataRegisters)
+
+    },
     handleShowModal($event){
       console.log('entrou', $event)
       this.showModal = true
       this.dataRegister = $event
+    },
+    handleClose(sended){
+      if(sended){
+        this.loadData();
+      }
+      this.showModal = false
     }
+  },
+  mounted(){
+    this.loadData()
   }
 }
 </script>
 
 <template>
-  <div class="">
+  <div class="mb-20">
     <Contador
       @finishDay="handleShowModal($event)"
     />
-    <ListWorkTimes/>
+    <ListWorkTimes
+      :dataRegisters="dataRegisters"
+    />
     <Modal 
       v-if="showModal"
-      @close="showModal = false"
+      @close="handleClose($event)"
       :dataRegister="dataRegister"
     />
   </div>

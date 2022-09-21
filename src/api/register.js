@@ -44,6 +44,9 @@ export async function ApiListGet(path, callback){
     // startLoading();
 
     await api.get(path)
+    .then((response)=>{
+            callback(response, {error: false})
+    })
     
 }
 

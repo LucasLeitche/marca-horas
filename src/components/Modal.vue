@@ -20,7 +20,7 @@
         <div id="modal-body" class="px-5 py-4 flex flex-col gap-5 text-black">
             <span> <strong class="text-light-lilac">Dia: </strong> {{dataRegister.day}} </span>
             <span> <strong class="text-light-lilac">Registro:</strong> {{dataRegister.registerTime}}</span>
-            <span class="text-timeWorkd"> <span class="" v-html="dataRegister.timeWorked"></span> </span>
+            <span class="text-timeWorkd"> <strong class="text-light-lilac">Tempo Trabalhado:</strong> <span class="" v-html="dataRegister.timeWorked"></span> </span>
             <textarea v-model="dataRegister.occurrence" class="border-2 rounded border-slate-400 outline-1 outline-light-lilac p-2" name="" id="" cols="30" rows="10"></textarea>
         </div>
         <div id="modal-footer" class="border-2 border-top py-4 px-5 flex justify-end gap-3">
@@ -58,7 +58,7 @@ export default {
         async handleConfirm(){
             let data = this.dataRegister
             await PostRegister(data);
-            this.$emit('close')
+            this.$emit('close', true)
             console.log(data)
         }
     }
