@@ -29,6 +29,4 @@
             <p>
                 Para visualizar código mudar para branch <i> "developer" </i>
             </p>
-            
-
         </div>
