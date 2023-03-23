@@ -19,6 +19,7 @@
                     <li>Firebase</li>
                 </ul>
             </p>
+            Para visualizar o prejeto acesse: 
             <a  
                 href="https://lucasleitche.github.io/marca-horas/" 
                 target="_blank"
@@ -27,6 +28,6 @@
                 Marcar Horas
             </a>
             <p>
-                Para visualizar código mudar para branch <i> "developer" </i>
+                Para visualizar acesse código mudar para branch <i> "developer" </i>
             </p>
         </div>
