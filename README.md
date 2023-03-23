@@ -1,33 +1,29 @@
- <h1>
-            Marcador de horas online
-        </h1>
-        <br/>
-        <div>
-            <p>Seja bem vindo ao projeto Marcador de horas onlie</p>
-        </div>
-        <hr>
-        <div>
-            <p style="margin: 15px 0">
-                O intuito desse projeto é auxiliar o controle de horas trabalhadas de prestadores de serviço.
-            </p>
-            <p>
-                Tecnologias utilizadas:
-                <ul>
-                    <li>Vue 3</li>
-                    <li>Tailwind css</li>
-                    <li>Axios</li>
-                    <li>Firebase</li>
-                </ul>
-            </p>
-            Para visualizar o prejeto acesse: 
-            <a  
-                href="https://lucasleitche.github.io/marca-horas/" 
-                target="_blank"
-                style="margin: 15px 0"
-            >
-                Marcar Horas
-            </a>
-            <p>
-                Para visualizar acesse código mudar para branch <i> "developer" </i>
-            </p>
-        </div>
+# Marcador de Horas Online
+
+Marcação de horas para prestadores de seriço
+
+<strong>Tecnologias</strong>
+<ul>
+  <li>Vue 3, Vuex, Vue Router</li>
+  <li>Axios</li>
+  <li>Firebase</li>
+</ul>
+<h2> Visualização em produção </h2> 
+
+https://lucasleitche.github.io/marca-horas/
+
+<h2> Para visualizar no ambiente de desenvolvimento </h2>
+
+git clone https://github.com/LucasLeitche/marcahoras.git
+
+cd applience
+
+git checkout developer
+
+npm i --save
+
+npm run dev
+
+<h2> Para visualizar o código altere para a branch developer </h2>
+
+git clone https://github.com/LucasLeitche/marcahoras.git
